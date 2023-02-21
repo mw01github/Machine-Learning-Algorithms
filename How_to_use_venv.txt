@@ -1,0 +1,10 @@
+How to make and use a virtual enviroment!
+
+1. python3 -m venv .venv
+#.venv is a common folder name
+#cd to right directory to create the .venv folder
+
+2.bash: source #curr_path#/.venv/bin/activate
+#to activate the enviroment
+
+3.pip install #package#
