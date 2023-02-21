@@ -1,5 +1,6 @@
 #define PY_SSIZE_T_CLEAN
 #include ".venv/lib/python3.9/site-packages/numpy/core/include/numpy/arrayobject.h"
+#include "linearregression.h"
 #include <python3.10/Python.h>
 #include <python3.10/methodobject.h>
 #include <python3.10/modsupport.h>
@@ -45,6 +46,7 @@ static PyObject *mymethod(PyObject *self, PyObject *args) {
   for (int i = 0; i < tempsize; i++) {
     outputArray[i] = (double)i;
   }
+  outputArray[0] = (double)foo();
 
   PyObject *outputNdArray = PyArray_SimpleNewFromData(
       ndimensions, dims, NPY_DOUBLE, (void *)outputArray);
