@@ -1,2 +1,2 @@
-// #include "linearregression.h"
-// int foo() { return 4; }
+#include "linearregression.h"
+int foo() { return 4; }
