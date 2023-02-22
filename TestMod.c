@@ -1,6 +1,6 @@
 #define PY_SSIZE_T_CLEAN
 #include ".venv/lib/python3.9/site-packages/numpy/core/include/numpy/arrayobject.h"
-#include "linearregression.h"
+#include "linearregression.c"
 #include <python3.10/Python.h>
 #include <python3.10/methodobject.h>
 #include <python3.10/modsupport.h>
@@ -9,6 +9,10 @@
 #include <python3.10/pyport.h>
 
 // python setup.py install
+// git add*
+// git commit -m "msg"
+// git push origin master
+// installation using pip instead of setup.py
 
 // returns simple integer
 /*
@@ -34,22 +38,17 @@ static PyObject *mymethod(PyObject *self, PyObject *args) {
     // O! to only accept ndarray(PyArrayType)
     return NULL;
   }
-  double *inputArray;
-  inputArray = (double *)PyArray_DATA(inputNdArray);
 
-  npy_intp dims[] = {3, 3};
-  int ndimensions = 2;
-  int tempsize = 9;
+  struct arrayInfo inputArrayInfo;
+  inputArrayInfo.nDimensions = (int)PyArray_NDIM(inputNdArray);
+  inputArrayInfo.dimensions = (long *)PyArray_DIMS(inputNdArray);
+  inputArrayInfo.arrayData = (double *)PyArray_DATA(inputNdArray);
 
-  double *outputArray = (double *)calloc(tempsize, sizeof(double));
-
-  for (int i = 0; i < tempsize; i++) {
-    outputArray[i] = (double)i;
-  }
-  outputArray[0] = (double)foo();
+  struct arrayInfo outputArrayInfo = linearregression(inputArrayInfo);
 
   PyObject *outputNdArray = PyArray_SimpleNewFromData(
-      ndimensions, dims, NPY_DOUBLE, (void *)outputArray);
+      outputArrayInfo.nDimensions, outputArrayInfo.dimensions, NPY_DOUBLE,
+      (void *)outputArrayInfo.arrayData);
   return Py_BuildValue("O", outputNdArray);
 }
 
