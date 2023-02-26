@@ -1,0 +1,24 @@
+compilation using gcc:
+
+1. Python.h include path:
+>import sysconfig >sysconfig.get_paths(), copy 'include' path
+/home/ubuntu/anaconda3/include/python3.9
+
+2:
+>import numpy >numpy.get_include()
+/home/ubuntu/MachineLearningAlgorithmsC/.venv/lib/python3.9/site-packages/numpy/core/include
+
+3. 
+gcc testmodule.c -shared -o testmodule.so -I/home/ubuntu/anaconda3/include/python3.9 -I/home/ubuntu/MachineLearningAlgorithmsC/.venv/lib/python3.9/site-packages/numpy/core/include -fPIC
+
+How to make and use a virtual enviroment!
+
+1. python3 -m venv .venv
+#.venv is a common folder name
+#cd to right directory to create the .venv folder
+
+2.bash: source #curr_path#/.venv/bin/activate
+source ./.venv/bin/activate
+#to activate the enviroment
+
+3.pip install #package# / pip list

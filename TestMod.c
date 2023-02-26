@@ -36,7 +36,6 @@ indicates it must be ndarray return NULL;
 static PyObject *mymethod(PyObject *self, PyObject *args) {
   PyArrayObject *inputNdArray = NULL;
   if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &inputNdArray)) {
-    // O! to only accept ndarray(PyArrayType)
     return NULL;
   }
 
