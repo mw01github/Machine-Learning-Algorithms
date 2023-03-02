@@ -9,7 +9,7 @@ compilation using gcc:
 /home/ubuntu/MachineLearningAlgorithmsC/.venv/lib/python3.9/site-packages/numpy/core/include
 
 3. 
-gcc testmodule.c -shared -o testmodule.so -I/home/ubuntu/anaconda3/include/python3.9 -I/home/ubuntu/MachineLearningAlgorithmsC/.venv/lib/python3.9/site-packages/numpy/core/include -fPIC
+gcc matrixmultiplication.c -shared -o matrixmultiplication.so -I/home/ubuntu/anaconda3/include/python3.9 -I/home/ubuntu/MachineLearningAlgorithmsC/.venv/lib/python3.9/site-packages/numpy/core/include -fPIC
 
 How to make and use a virtual enviroment!
 
@@ -22,3 +22,12 @@ source ./.venv/bin/activate
 #to activate the enviroment
 
 3.pip install #package# / pip list
+
+Git update
+
+// python setup.py install
+// git add*
+// git commit -m "msg"
+// git push origin master
+// installation using pip instead of setup.py
+//
