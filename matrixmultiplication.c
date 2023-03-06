@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "matrixmultiplicationimp.c"
 
-typedef enum MethodType {bruteForceMethod = 1, divideMethod = 2} METHODTYPE;
+typedef enum MethodType {bruteForceMethod = 1, divideMethod = 2, strassenMethod = 3} METHODTYPE;
 
 static PyObject *matrixmultiplicationmethod(PyObject *self, PyObject *args, METHODTYPE methodType) {
     PyArrayObject *inputNdArrayX = NULL;
@@ -41,6 +41,9 @@ static PyObject *matrixmultiplicationmethod(PyObject *self, PyObject *args, METH
         case divideMethod:
             divideImplementation(PyArray_DATA((void *)outputNdArray), PyArray_DATA(inputNdArrayX), PyArray_DATA(inputNdArrayY), XDims[0]);
             break;
+        case strassenMethod:
+            strassenImplementation(PyArray_DATA((void *)outputNdArray), PyArray_DATA(inputNdArrayX), PyArray_DATA(inputNdArrayY), XDims[0]);
+            break;
     }
 
     return outputNdArray;
@@ -48,10 +51,12 @@ static PyObject *matrixmultiplicationmethod(PyObject *self, PyObject *args, METH
 
 static PyObject *bruteforcemethod(PyObject *self, PyObject *args) { matrixmultiplicationmethod(self, args, bruteForceMethod); }
 static PyObject *dividemethod(PyObject *self, PyObject *args) { matrixmultiplicationmethod(self, args, divideMethod); }
+static PyObject *strassenmethod(PyObject *self, PyObject *args) { matrixmultiplicationmethod(self, args, strassenMethod); }
 
 static PyMethodDef matrixmultiplicationmethods[] = {
     {"bruteforcemethod", bruteforcemethod, METH_VARARGS, "Brute Force Method"},
     {"dividemethod", dividemethod, METH_VARARGS, "Divide and Conquer Method"},
+    {"strassenmethod", strassenmethod, METH_VARARGS, "Strassen and Conquer Method"},
     {NULL, NULL, 0, NULL}
 };
 
